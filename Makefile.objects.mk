@@ -74,14 +74,22 @@ CXX_SRCS = src/audio/resid/residctrl.cpp \
 	src/resid/sid.cpp \
 	src/resid/voice.cpp \
 	src/resid/wave.cpp \
-	src/resid-fp/envelopefp.cpp \
-	src/resid-fp/extfiltfp.cpp \
-	src/resid-fp/filterfp.cpp \
-	src/resid-fp/potfp.cpp \
-	src/resid-fp/sidfp.cpp \
-	src/resid-fp/versionfp.cpp \
-	src/resid-fp/voicefp.cpp \
-	src/resid-fp/wavefp.cpp 
+	src/resid-fp/Dac.cpp \
+	src/resid-fp/EnvelopeGenerator.cpp \
+	src/resid-fp/ExternalFilter.cpp \
+	src/resid-fp/Filter.cpp \
+	src/resid-fp/Filter6581.cpp \
+	src/resid-fp/Filter8580.cpp \
+	src/resid-fp/FilterModelConfig.cpp \
+	src/resid-fp/FilterModelConfig8580.cpp \
+	src/resid-fp/Integrator.cpp \
+	src/resid-fp/Integrator8580.cpp \
+	src/resid-fp/OpAmp.cpp \
+	src/resid-fp/SID.cpp \
+	src/resid-fp/Spline.cpp \
+	src/resid-fp/WaveformCalculator.cpp \
+	src/resid-fp/WaveformGenerator.cpp \
+	src/resid-fp/resample/SincResampler.cpp
 
 CXX_OBJS = $(CXX_SRCS:.cpp=$(OBJ_EXT))
 

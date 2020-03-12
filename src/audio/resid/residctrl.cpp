@@ -11,7 +11,7 @@
 
 #include <stdlib.h>
 #include <resid/sid.h>
-#include <resid-fp/sidfp.h>
+#include <resid-fp/SID.h>
 //#include <assert.h>
 #include <stdio.h>
 
@@ -40,7 +40,7 @@ extern "C" {
         0x16,0x17,0x18,0x15
 	};
 	SID *sid= 0;
-	SIDFP *sidfp = 0;
+	reSIDfp::SID *sidfp = 0;
 	int residdelay = 0;
 	int usefp = 0;
 
@@ -63,17 +63,17 @@ extern "C" {
 	
 		samplerate = speed;
 	
-		if (!sidfp) sidfp = new SIDFP();
+		if (!sidfp) sidfp = new reSIDfp::SID();
 		if (!sid) sid = new SID();
 		
 		if(usefp) {
 			switch(interpolate)
 			{
 			case 0:
-				sidfp->set_sampling_parameters(clockrate, SAMPLE_INTERPOLATE, speed);
+				sidfp->setSamplingParameters(clockrate, reSIDfp::DECIMATE, speed, 20000);
 				break;
 			default:
-				sidfp->set_sampling_parameters(clockrate, SAMPLE_RESAMPLE_INTERPOLATE, speed);
+				sidfp->setSamplingParameters(clockrate, reSIDfp::RESAMPLE, speed, 20000);
 				break;
 			}
 			sidfp->reset();
@@ -82,9 +82,11 @@ extern "C" {
 			}
 
 			if (m == 1)
-				sidfp->set_chip_model(MOS8580);
+				sidfp->setChipModel(reSIDfp::MOS8580);
 			else
-				sidfp->set_chip_model(MOS6581);
+				sidfp->setChipModel(reSIDfp::MOS6581);
+
+			/* TODO Replace this with new simplified filter curve mechanism
 			sidfp->get_filter().set_distortion_properties(
                 fparams->distortionrate,
                 fparams->distortionpoint,
@@ -99,7 +101,8 @@ extern "C" {
                 fparams->type4b);
 			sidfp->set_voice_nonlinearity(
                 fparams->voicenonlinearity);
-			sidfp->enable_filter(true);
+			*/
+			sidfp->enableFilter(true);
 		}
 		else {
 			switch(interpolate)
@@ -149,7 +152,7 @@ extern "C" {
 				((c == 0) || (c == 7) || (c == 14))) {
 				tdelta2 = rc;
 				if(usefp)
-					result = sidfp->clock(tdelta2, ptr, samples);
+					result = sidfp->clock(tdelta2, ptr);
 				else
 					result = sid->clock(tdelta2, ptr, samples);
 				total += result;
@@ -176,7 +179,7 @@ extern "C" {
 		
 			tdelta2 = SIDWRITEDELAY;
 			if(usefp)
-				result = sidfp->clock(tdelta2, ptr, samples);
+				result = sidfp->clock(tdelta2, ptr);
 			else
 				result = sid->clock(tdelta2, ptr, samples);
 			total += result;
@@ -186,7 +189,7 @@ extern "C" {
 		}
 
 		if(usefp)
-			result = sidfp->clock(tdelta, ptr, samples);
+			result = sidfp->clock(tdelta, ptr);
 		else
 			result = sid->clock(tdelta, ptr, samples);
 		
