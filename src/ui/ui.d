@@ -390,7 +390,7 @@ final private class Toplevel : WindowSwitcher {
 		+/
 
 		super(Rectangle(), [cast(Window)sequencer, instable, 
-					   bottomTabSwitcher]);
+					   bottomTabSwitcher, chordtable]);
 		{
 			int x1 = 4;
 			int x2 = x1 + (com.fb.mode > 0 ? 64 : 48);
