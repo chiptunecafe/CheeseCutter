@@ -1,12 +1,14 @@
-CheeseCutter 2
+CheeseCutter 2-CC
 
-http://theyamo.kapsi.fi/ccutter
+Fork to update reSIDfp and implement other fixes by rytone 2020.
 
 Programmed by abaddon 2009-2017.
 
 Mac OSX and D2 port by Ruk 2013.
 
 reSID engine by Dag Lem & A. Lankila.
+
+reSIDfp engine by Leandro Nini, et al.
 
 Parts of reSID interface (sid.cpp) by Cadaver / CovertBitops.
 
