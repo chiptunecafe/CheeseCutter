@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.target.os }}
     steps:
     - name: Install LLVM
-      if: matrix.target.os == "windows-latest"
+      if: matrix.target.os == 'windows-latest'
       run: choco install llvm
     - uses: ilammy/msvc-dev-cmd@v1.0.1
       with:
