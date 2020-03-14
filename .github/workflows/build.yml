@@ -5,8 +5,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/setup-python@v1
-    - name: Install D
-      run: choco install dmd
+    - uses: mihails-strasuns/setup-dlang@v0.5.0
+      with:
+        compiler: dmd-2.091.0
     - name: Install Meson
       run: pip install meson
     - uses: actions/checkout@v1
