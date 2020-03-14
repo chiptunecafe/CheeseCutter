@@ -1,8 +1,8 @@
 if __name__ == "__main__":
-    import os, shutil
+    import os, shutil, sys
     
     if os.path.exists("CheeseCutter"):
-        os.rmdir("CheeseCutter")
+        shutil.rmtree("CheeseCutter")
 
     os.mkdir("CheeseCutter")
 
@@ -18,3 +18,5 @@ if __name__ == "__main__":
     else:
         shutil.copy("build/ccutter", "CheeseCutter")
         shutil.copy("build/ct2util", "CheeseCutter")
+
+    shutil.make_archive(sys.argv[1], "zip", "CheeseCutter")

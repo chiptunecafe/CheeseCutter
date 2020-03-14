@@ -1,6 +1,3 @@
-ccutter
-ct2util
-*.tar.gz
-*.tar.bz2
+*.zip
 build/
 CheeseCutter/

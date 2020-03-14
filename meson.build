@@ -137,5 +137,6 @@ install_subdir('tunes', install_dir: 'share/ccutter')
 install_man('doc/ccutter.1', 'doc/ccutter.fr.1', 'doc/ct2util.1', 'doc/ct2util.fr.1')
 
 if target_machine.system() == 'windows'
+    configure_file(input: 'arch/Win32/SDL.dll', output: 'SDL.dll', copy: true)
     install_data('arch/Win32/SDL.dll', install_dir: get_option('bindir'))
 endif
