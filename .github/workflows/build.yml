@@ -4,8 +4,7 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Run vcvarsall.bat
-      run: '& "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64'
+    - uses: ilammy/msvc-dev-cmd@v1.0.1
     - uses: actions/setup-python@v1
     - uses: mihails-strasuns/setup-dlang@v0.5.0
       with:
