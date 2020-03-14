@@ -31,14 +31,18 @@ jobs:
       run: meson build
       env:
         Path: '${{ env.Path }};C:/Program Files/LLVM/bin'
-    - uses: actions/upload-artifact@v2-preview
+    - name: Upload Meson error log
+      uses: actions/upload-artifact@v2-preview
       if: failure()
       with:
         name: meson-log.txt
         path: build/meson-logs/meson-log.txt
     - name: Compile
       run: ninja -C build
-    - uses: actions/upload-artifact@v2-preview
+    - name: Package
+      run: python ci_package.py
+    - name: Upload
+      uses: actions/upload-artifact@v2-preview
       with:
         name: CheeseCutter-v2.9-CC-${{ matrix.target.name }}
-        path: build/*.[ed]*
+        path: CheeseCutter

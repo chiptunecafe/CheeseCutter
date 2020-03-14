@@ -130,9 +130,12 @@ util_sources += [
     'src/asm/tree.c'
 ]
 
-executable('ccutter', main_sources, include_directories: 'src', link_language: 'd', d_import_dirs: include_directories('src/c64', 'src/font'))
-executable('ct2util', util_sources, include_directories: 'src', link_language: 'd', d_import_dirs: include_directories('src/c64', 'src/font'))
+executable('ccutter', main_sources, include_directories: 'src', link_language: 'd', d_import_dirs: include_directories('src/c64', 'src/font'), install:true)
+executable('ct2util', util_sources, include_directories: 'src', link_language: 'd', d_import_dirs: include_directories('src/c64', 'src/font'), install: true)
+
+install_subdir('tunes', install_dir: 'share/ccutter')
+install_man('doc/ccutter.1', 'doc/ccutter.fr.1', 'doc/ct2util.1', 'doc/ct2util.fr.1')
 
 if target_machine.system() == 'windows'
-    configure_file(input: 'arch/Win32/SDL.dll', output: 'SDL.dll', copy: true)
+    install_data('arch/Win32/SDL.dll', install_dir: get_option('bindir'))
 endif
