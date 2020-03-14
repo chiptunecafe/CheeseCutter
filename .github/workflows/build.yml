@@ -13,14 +13,14 @@ jobs:
       run: pip install meson
     - uses: actions/checkout@v1
     - name: Configure build
-      run: meson build
+      run: meson setup build --backend ninja
       env:
         CC: cl
         CC_LD: link
         CXX: cl
         CXX_LD: link
         DC: dmd
-        DC_LD: link
+        D_LD: link
 
     - uses: actions/upload-artifact@v2-preview
       if: failure()
