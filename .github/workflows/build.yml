@@ -4,7 +4,6 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: ilammy/msvc-dev-cmd@v1.0.1
     - uses: actions/setup-python@v1
     - uses: mihails-strasuns/setup-dlang@v0.5.0
       with:
@@ -12,6 +11,7 @@ jobs:
     - name: Install Meson
       run: pip install meson
     - uses: actions/checkout@v1
+    - uses: ilammy/msvc-dev-cmd@v1.0.1
     - name: Configure build
       run: meson build
     - uses: actions/upload-artifact@v2-preview
