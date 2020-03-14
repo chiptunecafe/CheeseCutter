@@ -4,6 +4,8 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+    - name: Install LLVM
+      run: choco install llvm
     - uses: ilammy/msvc-dev-cmd@v1.0.1
     - uses: actions/setup-python@v1
     - uses: mihails-strasuns/setup-dlang@v0.5.0
@@ -14,14 +16,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Configure build
       run: meson setup build --backend ninja
-      env:
-        CC: cl
-        CC_LD: link
-        CXX: cl
-        CXX_LD: link
-        DC: dmd
-        D_LD: link
-
     - uses: actions/upload-artifact@v2-preview
       if: failure()
       with:
