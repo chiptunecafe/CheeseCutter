@@ -6,6 +6,8 @@ jobs:
     steps:
     - name: Install LLVM
       run: choco install llvm
+    - env:
+        Path: 'C:/Program Files/LLVM/bin'
     - uses: ilammy/msvc-dev-cmd@v1.0.1
     - uses: actions/setup-python@v1
     - uses: mihails-strasuns/setup-dlang@v0.5.0
