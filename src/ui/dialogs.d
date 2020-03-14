@@ -14,6 +14,7 @@ import ui.ui;
 import ui.input;
 import std.algorithm;
 import std.string;
+import std.path;
 import std.file;
 import std.utf;
 import std.array;
@@ -311,7 +312,7 @@ class FileSelector : Window {
 			int col = 15;
 			if(ofs < filelist.length) {
 				File f = filelist[ofs];
-				auto ind = 1+f.name.lastIndexOf(DIR_SEPARATOR);
+				auto ind = 1+f.name.lastIndexOf(dirSeparator);
 				if( ofs < 2 || (f.exists && f.isdir) ) {
 					col = 13;
 				}
@@ -323,7 +324,7 @@ class FileSelector : Window {
 
 	void blink() {
 		int y = area.y + fpos.pos;
-		auto ind = 1 + filelist[num].name.lastIndexOf(DIR_SEPARATOR);
+		auto ind = 1 + filelist[num].name.lastIndexOf(dirSeparator);
 		screen.fprint(area.x+5,y,fstr("`b1  " ~ filelist[num].name[ind..$].leftJustify(area.width-3)) ~ "  ");
 	}
 	
@@ -331,11 +332,11 @@ class FileSelector : Window {
 		if(isDir(selected)) {
 			string s;
 			if(selected == ".." ) {
-				int i = cast(int) directory.lastIndexOf(DIR_SEPARATOR);
+				int i = cast(int) directory.lastIndexOf(dirSeparator);
 				if(i >= 0) {
 					s = directory[0..i];
-					if(s.lastIndexOf(DIR_SEPARATOR) < 0) {
-						s ~= DIR_SEPARATOR;
+					if(s.lastIndexOf(dirSeparator) < 0) {
+						s ~= dirSeparator;
 					}
 					directory = s;
 				}
@@ -542,7 +543,7 @@ class FileSelectorDialog : WindowSwitcher {
 	}
 
 	@property string fullname() {
-		return getcwd() ~ DIR_SEPARATOR ~ sfile.toString();
+		return getcwd() ~ dirSeparator ~ sfile.toString();
 	}
 
 	@property string directory() {
@@ -572,7 +573,7 @@ class FileSelectorDialog : WindowSwitcher {
 		screen.fprint(x,area.y+area.height-3,format("`0fDirectory: `0d%s",sdir.toString()));
 		
 		string f = sfile.toString();
-		int ind = cast(int) (1+f.lastIndexOf(DIR_SEPARATOR));
+		int ind = cast(int) (1+f.lastIndexOf(dirSeparator));
 		screen.fprint(x,area.y+area.height-2,format("`0f Filename: `0d%s",f[ind..$]));
 		
 		activeWindow.update();
@@ -597,7 +598,7 @@ class FileSelectorDialog : WindowSwitcher {
 		default:
 			int r = activeWindow.keypress(key);
 			if(r == WRAP){
-				int ind = cast(int) (1 + fsel.getSelected().lastIndexOf(DIR_SEPARATOR)); 
+				int ind = cast(int) (1 + fsel.getSelected().lastIndexOf(dirSeparator)); 
 				sfile.setString(cast(string)(fsel.getSelected()[ind..$]));
 			}
 			break;
@@ -614,7 +615,7 @@ class FileSelectorDialog : WindowSwitcher {
 			return r;
 		}
 		else if(activeWindow == sfile) { // pressed RETURN in file dialog
-			//string filename = getcwd() ~ DIR_SEPARATOR ~ sfile.toString();
+			//string filename = getcwd() ~ dirSeparator ~ sfile.toString();
 			cb(fullname);
 			return RETURN;
 		}
@@ -668,7 +669,7 @@ class LoadFileDialog : FileSelectorDialog {
 			sdir.setString(getcwd());
 		}
 		else if(activeWindow == sfile) { // pressed RETURN in file dialog
-			string filename = getcwd() ~ DIR_SEPARATOR ~ sfile.toString();
+			string filename = getcwd() ~ dirSeparator ~ sfile.toString();
 			cb(filename);
 		}
 	}
@@ -705,7 +706,7 @@ class SaveFileDialog : FileSelectorDialog {
 			sdir.setString(getcwd());
 		}
 		else if(activeWindow == sfile) { // pressed RETURN in file dialog
-			string filename = getcwd() ~ DIR_SEPARATOR ~ sfile.toString();
+			string filename = getcwd() ~ dirSeparator ~ sfile.toString();
 			processFileCallback(filename);
 		}
 	}

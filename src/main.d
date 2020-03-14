@@ -16,20 +16,9 @@ import audio.audio;
 import std.stdio;
 import std.string;
 import std.conv;
+import std.path;
 import std.file;
 import audio.timer;
-
-version(linux) {
-	const DIR_SEPARATOR = '/';
-}
-
-version(OSX) {
-	const DIR_SEPARATOR = '/';
-}
-
-version(Win32) {
-	const DIR_SEPARATOR = '\\';
-}
 
 void initVideo(bool useFullscreen, bool useyuv) {
 	int mx, my;
@@ -278,7 +267,7 @@ void openFile(char* filename){
 void loadFile(string filename){
 	if(filename && mainui) {
 		string dir, fn;
-		int sep = cast(int) filename.lastIndexOf(DIR_SEPARATOR); 
+		int sep = cast(int) filename.lastIndexOf(dirSeparator); 
 		fn = filename[sep + 1..$];
 		if(sep >= 0)
 			dir = filename[0 .. sep];

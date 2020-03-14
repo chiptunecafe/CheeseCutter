@@ -1,6 +1,5 @@
-**.o
-**.bin
 ccutter
 ct2util
 *.tar.gz
 *.tar.bz2
+build/

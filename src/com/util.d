@@ -3,6 +3,7 @@ CheeseCutter v2 (C) Abaddon. Licensed under GNU GPL.
 */
 
 module com.util;
+import std.algorithm.searching;
 import std.stdio;
 import std.string;
 import std.conv;
@@ -139,7 +140,7 @@ ubyte[] table2Array(string table) {
 	static ubyte[4096] arr;
 	int idx;
 	foreach(strvalue; std.array.split(table)) {
-		munch(strvalue, "\r\n\t");
+		strvalue = find(strvalue, "\r\n\t");
 		
 		arr[idx] = cast(ubyte)str2Value(strvalue);
 		idx++;

@@ -44,7 +44,7 @@ private:
     static const unsigned int DAC_BITS = 11;
 
 private:
-    static std::unique_ptr<FilterModelConfig> instance;
+    static std::auto_ptr<FilterModelConfig> instance;
     // This allows access to the private constructor
 #ifdef HAVE_CXX11
     friend std::unique_ptr<FilterModelConfig>::deleter_type;

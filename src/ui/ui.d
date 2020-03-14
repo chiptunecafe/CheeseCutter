@@ -20,6 +20,7 @@ import com.util;
 import seq.sequencer;
 import audio.audio;
 import std.string;
+import std.path;
 import std.file;
 import std.stdio;
 import audio.audio, audio.timer, audio.callback;
@@ -1148,7 +1149,7 @@ final class UI {
 		}
 
 		string fn = s.strip();
-		auto ind = 1 + fn.lastIndexOf(DIR_SEPARATOR);
+		auto ind = 1 + fn.lastIndexOf(dirSeparator);
 		fn = fn[ind..$];
 		state.filename = fn;
 
@@ -1196,7 +1197,7 @@ final class UI {
 		audio.player.setVoicon(0,0,0);
 		
 		string fn = s.strip();
-		auto ind = 1 + fn.lastIndexOf(DIR_SEPARATOR);
+		auto ind = 1 + fn.lastIndexOf(dirSeparator);
 		fn = fn[ind .. $];
 		state.filename = fn;
 		infobar.refresh();

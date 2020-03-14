@@ -40,7 +40,7 @@ class Integrator8580;
 class FilterModelConfig8580
 {
 private:
-    static std::unique_ptr<FilterModelConfig8580> instance;
+    static std::auto_ptr<FilterModelConfig8580> instance;
     // This allows access to the private constructor
 #ifdef HAVE_CXX11
     friend std::unique_ptr<FilterModelConfig8580>::deleter_type;

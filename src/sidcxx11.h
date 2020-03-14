@@ -29,7 +29,6 @@
 #  define nullptr    0
 #  define override
 #  define final
-#  define unique_ptr auto_ptr
 #endif
 
 #endif

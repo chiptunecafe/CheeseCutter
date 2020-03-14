@@ -109,7 +109,7 @@ const Spline::Point opamp_voltage[OPAMP_SIZE] =
     {  8.91,  1.30 },  // Approximate end of actual range
 };
 
-std::unique_ptr<FilterModelConfig8580> FilterModelConfig8580::instance(nullptr);
+std::auto_ptr<FilterModelConfig8580> FilterModelConfig8580::instance(nullptr);
 
 FilterModelConfig8580* FilterModelConfig8580::getInstance()
 {
