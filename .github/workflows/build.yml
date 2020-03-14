@@ -1,0 +1,20 @@
+name: Build
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/setup-python@v1
+    - name: Install D
+      run: choco install dmd
+    - name: Install Meson
+      run: pip install meson
+    - uses: actions/checkout@v1
+    - name: Configure build
+      run: meson build
+    - name: Compile
+      run: ninja -C build
+    - uses: actions/upload-artifact@v2-preview
+      with:
+        name: CheeseCutter
+        path: build/*.[ed]*
