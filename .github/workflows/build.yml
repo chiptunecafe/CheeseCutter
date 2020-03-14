@@ -2,9 +2,17 @@ name: Build
 on: [push]
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        target:
+          - name: Linux
+            os: ubuntu-latest
+          - name: Win32
+            os: windows-latest
+    runs-on: ${{ matrix.target.os }}
     steps:
     - name: Install LLVM
+      if: matrix.target.os == "windows-latest"
       run: choco install llvm
     - uses: ilammy/msvc-dev-cmd@v1.0.1
       with:
@@ -17,7 +25,7 @@ jobs:
       run: pip install meson
     - uses: actions/checkout@v1
     - name: Configure build
-      run: meson setup build --backend ninja
+      run: meson build
       env:
         Path: '${{ env.Path }};C:/Program Files/LLVM/bin'
     - uses: actions/upload-artifact@v2-preview
@@ -29,5 +37,5 @@ jobs:
       run: ninja -C build
     - uses: actions/upload-artifact@v2-preview
       with:
-        name: CheeseCutter
+        name: CheeseCutter-v2.9-CC-${{ matrix.target.name }}
         path: build/*.[ed]*
