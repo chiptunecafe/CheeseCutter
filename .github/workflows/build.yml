@@ -40,16 +40,17 @@ jobs:
     - name: Compile
       run: ninja -C build
     - name: Package
-      run: python ci_package.py CheeseCutter-v2.9-CC-${{ matrix.target.name }}
+      run: python ci_package.py CheeseCutter
     - name: Upload CI artifact
       uses: actions/upload-artifact@v2-preview
       if: github.event_name != 'release'
       with:
         name: CheeseCutter-v2.9-CC-${{ matrix.target.name }}-DEV
         path: CheeseCutter
-    - uses: JasonEtco/upload-to-release@v0.1.1
+    - uses: Shopify/upload-to-release@v1
       if: github.event_name == 'release'
       with:
-        args: CheeseCutter-v2.9-CC-${{ matrix.target.name }}.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: CheeseCutter-v2.9-CC-${{ matrix.target.name }}.zip
+        path: CheeseCutter.zip
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        content_type: application/zip
