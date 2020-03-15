@@ -52,5 +52,5 @@ jobs:
       with:
         name: CheeseCutter-v2.9-CC-${{ matrix.target.name }}.zip
         path: CheeseCutter.zip
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
         content_type: application/zip
