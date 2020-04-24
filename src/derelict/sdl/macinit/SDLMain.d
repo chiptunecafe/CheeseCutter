@@ -25,7 +25,6 @@ private
 
     else
     {
-        import std.c.linux.linux;
         import core.stdc.stdlib;
         import core.stdc.string;
         import core.sys.posix.unistd;
