@@ -21,14 +21,13 @@
 #ifndef SIDCXX11_H
 #define SIDCXX11_H
 
-#ifdef HAVE_CONFIG_H
-#  include "config.h"
-#endif
+#define HAVE_CXX11 @HAVE_CXX11@
 
 #ifndef HAVE_CXX11
 #  define nullptr    0
 #  define override
 #  define final
+#  define unique_ptr auto_ptr
 #endif
 
 #endif

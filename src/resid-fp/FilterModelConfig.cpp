@@ -89,7 +89,7 @@ const Spline::Point opamp_voltage[OPAMP_SIZE] =
   { 10.31,  0.81 },  // Approximate end of actual range
 };
 
-std::auto_ptr<FilterModelConfig> FilterModelConfig::instance(nullptr);
+std::unique_ptr<FilterModelConfig> FilterModelConfig::instance(nullptr);
 
 FilterModelConfig* FilterModelConfig::getInstance()
 {
@@ -240,12 +240,13 @@ FilterModelConfig::FilterModelConfig() :
 
     //  EKV model:
     //
-    //  Ids = Is*(if - ir)
-    //  Is = 2*u*Cox*Ut^2/k*W/L
+    //  Ids = Is * (if - ir)
+    //  Is = (2 * u*Cox * Ut^2)/k * W/L
     //  if = ln^2(1 + e^((k*(Vg - Vt) - Vs)/(2*Ut))
     //  ir = ln^2(1 + e^((k*(Vg - Vt) - Vd)/(2*Ut))
 
     const double kVt = k * Vth;
+    // moderate inversion characteristic current
     const double Is = 2. * uCox * Ut * Ut / k * WL_vcr;
 
     // Normalized current factor for 1 cycle at 1MHz.

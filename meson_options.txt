@@ -1,0 +1,2 @@
+option('resid_branch_hints', type: 'boolean', value: 'true')
+option('resid_inline', type: 'boolean', value: 'true')

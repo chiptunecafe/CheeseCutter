@@ -63,7 +63,7 @@ SID::SID() :
     filter6581(new Filter6581()),
     filter8580(new Filter8580()),
     externalFilter(new ExternalFilter()),
-    resampler(static_cast<nullptr_t>(nullptr)),
+    resampler(nullptr),
     potX(new Potentiometer()),
     potY(new Potentiometer())
 {

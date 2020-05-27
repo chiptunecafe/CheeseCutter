@@ -1,4 +1,4 @@
-project('cheesecutter', 'd', 'c', 'cpp', version: '2.9-CC', default_options: ['buildtype=debugoptimized'])
+project('cheesecutter', 'd', 'c', 'cpp', version: '2.9-CC', default_options: ['buildtype=debugoptimized', 'cpp_std=c++11'])
 
 # ccutter D sources
 main_sources = [
@@ -129,6 +129,24 @@ util_sources += [
     'src/asm/section.c',
     'src/asm/tree.c'
 ]
+
+# residfp configuration
+cpp_compiler = meson.get_compiler('cpp')
+have_builtin_expect = cpp_compiler.compiles('int main() { __builtin_expect(0, 0); }', name: '__builtin_expect')
+
+siddefs_fp = configuration_data()
+siddefs_fp.set10('RESID_BRANCH_HINTS', get_option('resid_branch_hints'))
+siddefs_fp.set10('HAVE_BUILTIN_EXPECT', have_builtin_expect)
+if get_option('resid_inline')
+    siddefs_fp.set('RESID_INLINE', 'inline')
+    siddefs_fp.set('RESID_INLINING', '1')
+else
+    siddefs_fp.set('RESID_INLINE', '')
+    siddefs_fp.set('RESID_INLINING', '0')
+endif
+
+configure_file(input: 'src/resid-fp/siddefs-fp.h.in', output: 'siddefs-fp.h', configuration: siddefs_fp)
+configure_file(input: 'src/resid-fp/sidcxx11.h.in', output: 'sidcxx11.h', configuration: { 'HAVE_CXX11': 1 }) # TODO maybe detect
 
 executable('ccutter', main_sources, include_directories: 'src', link_language: 'd', d_import_dirs: include_directories('src/c64', 'src/font'), install:true)
 executable('ct2util', util_sources, include_directories: 'src', link_language: 'd', d_import_dirs: include_directories('src/c64', 'src/font'), install: true)
