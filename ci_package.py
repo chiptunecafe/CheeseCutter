@@ -15,6 +15,15 @@ if __name__ == "__main__":
         shutil.copy("build/ccutter.exe", "CheeseCutter")
         shutil.copy("build/ct2util.exe", "CheeseCutter")
         shutil.copy("build/SDL.dll", "CheeseCutter")
+    elif sys.platform == "darwin":
+        os.makedirs("CheeseCutter/CheeseCutter.app/Contents/MacOS")
+        os.makedirs("CheeseCutter/CheeseCutter.app/Contents/Frameworks")
+
+        shutil.copy("arch/MacOS/Contents/Info.plist", "CheeseCutter/CheeseCutter.app/Contents")
+        shutil.copytree("arch/MacOS/Contents/Resources", "CheeseCutter/CheeseCutter.app/Contents/Resources")
+        shutil.copy("build/ccutter", "CheeseCutter/CheeseCutter.app/Contents/MacOS");
+        shutil.copy("build/ct2util", "CheeseCutter/CheeseCutter.app/Contents/MacOS");
+        shutil.copytree("arch/MacOS/SDL.framework", "CheeseCutter/CheeseCutter.app/Contents/Frameworks/SDL.framework");
     else:
         shutil.copy("build/ccutter", "CheeseCutter")
         shutil.copy("build/ct2util", "CheeseCutter")
