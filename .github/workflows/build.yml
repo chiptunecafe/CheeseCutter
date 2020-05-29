@@ -45,7 +45,7 @@ jobs:
       uses: actions/upload-artifact@v2-preview
       if: github.event_name != 'release'
       with:
-        name: CheeseCutter-v2.9-CC-${{ matrix.target.name }}-DEV
+        name: CheeseCutter-v2.10-CC-WIP--${{ matrix.target.name }}-DEV
         path: CheeseCutter
     - uses: Shopify/upload-to-release@1.0.0
       if: github.event_name == 'release'

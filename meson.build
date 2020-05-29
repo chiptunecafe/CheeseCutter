@@ -1,4 +1,4 @@
-project('cheesecutter', 'd', 'c', 'cpp', version: '2.9-CC', default_options: ['buildtype=debugoptimized', 'cpp_std=c++11'])
+project('cheesecutter', 'd', 'c', 'cpp', version: '2.10-CC-WIP', default_options: ['buildtype=debugoptimized', 'cpp_std=c++11'])
 
 # ccutter D sources
 main_sources = [

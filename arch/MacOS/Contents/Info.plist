@@ -44,7 +44,7 @@
 	<key>CFBundleSignature</key>
 	<string>CT</string>
 	<key>CFBundleVersion</key>
-	<string>2.9-CC</string>
+	<string>2.10-CC-WIP</string>
 	<key>NSHighResolutionCapable</key>
 	<true/>
 </dict>
