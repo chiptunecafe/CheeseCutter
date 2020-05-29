@@ -327,19 +327,23 @@ class FileSelector : Window {
 		auto ind = 1 + filelist[num].name.lastIndexOf(dirSeparator);
 		screen.fprint(area.x+5,y,fstr("`b1  " ~ filelist[num].name[ind..$].leftJustify(area.width-3)) ~ "  ");
 	}
+
+	void goParentDir() {
+		string s;
+		int i = cast(int) directory.lastIndexOf(dirSeparator);
+		if(i >= 0) {
+			s = directory[0..i];
+			if(s.lastIndexOf(dirSeparator) < 0) {
+				s ~= dirSeparator;
+			}
+			directory = s;
+		}
+	}
 	
 	int fileHandler() {
 		if(isDir(selected)) {
-			string s;
 			if(selected == ".." ) {
-				int i = cast(int) directory.lastIndexOf(dirSeparator);
-				if(i >= 0) {
-					s = directory[0..i];
-					if(s.lastIndexOf(dirSeparator) < 0) {
-						s ~= dirSeparator;
-					}
-					directory = s;
-				}
+				goParentDir();
 			}
 			else if(selected != ".") {
 				directory = cast(string)(selected.dup);
@@ -371,6 +375,11 @@ class FileSelector : Window {
 			return WRAP;
 		case SDLK_END:
 			cursorEnd();
+			return WRAP;
+		case SDLK_BACKSPACE:
+			goParentDir();
+			reset();
+			refresh();
 			return WRAP;
 		default:
 			break;
